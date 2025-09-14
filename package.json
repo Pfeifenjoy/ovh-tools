@@ -1,23 +1,28 @@
 {
-  "name": "ovh-tools",
-  "version": "0.0.0",
-  "description": "Cli tool for more effective development with OVH.",
-  "keywords": [
-    "ovh"
-  ],
-  "homepage": "https://github.com/Pfeifenjoy/ovh-tools#readme",
-  "bugs": {
-    "url": "https://github.com/Pfeifenjoy/ovh-tools/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pfeifenjoy/ovh-tools.git"
-  },
-  "license": "MIT",
-  "author": "Arwed Mett",
-  "type": "commonjs",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+	"name": "ovh-tools",
+	"version": "0.0.0",
+	"description": "Cli tool for more effective development with OVH.",
+	"keywords": [
+		"ovh"
+	],
+	"homepage": "https://github.com/Pfeifenjoy/ovh-tools#readme",
+	"bugs": {
+		"url": "https://github.com/Pfeifenjoy/ovh-tools/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Pfeifenjoy/ovh-tools.git"
+	},
+	"license": "MIT",
+	"author": "Arwed Mett",
+	"type": "commonjs",
+	"main": "dist/index.js",
+	"scripts": {
+		"format": "npx prettier --write .",
+		"test:lint": "npx prettier --check .",
+		"test": "npm run test:lint"
+	},
+	"devDependencies": {
+		"prettier": "^3.6.2"
+	}
 }
