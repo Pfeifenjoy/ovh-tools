@@ -15,14 +15,22 @@
 	},
 	"license": "MIT",
 	"author": "Arwed Mett",
-	"type": "commonjs",
+	"type": "module",
 	"main": "dist/index.js",
 	"scripts": {
-		"format": "npx prettier --write .",
-		"test:lint": "npx prettier --check .",
+		"format:eslint": "npx eslint --fix .",
+		"format:prettier": "npx prettier --write .",
+		"format": "npm run format:prettier && npm run format:eslint",
+		"test:lint:eslint": "npx eslint .",
+		"test:lint:prettier": "npx prettier --check .",
+		"test:lint": "npm run test:lint:prettier && npm run test:lint:eslint",
 		"test": "npm run test:lint"
 	},
 	"devDependencies": {
+		"eslint": "^9.35.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-import": "^2.32.0",
+		"eslint-plugin-prettier": "^5.5.4",
 		"prettier": "^3.6.2"
 	}
 }
