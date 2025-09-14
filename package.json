@@ -18,19 +18,23 @@
 	"type": "module",
 	"main": "dist/index.js",
 	"scripts": {
+		"clean": "rm -rf dist",
+		"build": "npx tsc",
 		"format:eslint": "npx eslint --fix .",
 		"format:prettier": "npx prettier --write .",
 		"format": "npm run format:prettier && npm run format:eslint",
 		"test:lint:eslint": "npx eslint .",
 		"test:lint:prettier": "npx prettier --check .",
 		"test:lint": "npm run test:lint:prettier && npm run test:lint:eslint",
-		"test": "npm run test:lint"
+		"test": "npm run test:lint",
+		"release": "npm run clean && npm run build && npm run test"
 	},
 	"devDependencies": {
 		"eslint": "^9.35.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-import": "^2.32.0",
 		"eslint-plugin-prettier": "^5.5.4",
-		"prettier": "^3.6.2"
+		"prettier": "^3.6.2",
+		"typescript": "^5.9.2"
 	}
 }
