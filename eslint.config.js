@@ -1,12 +1,18 @@
 import js from "@eslint/js"
-import prettier from "eslint-config-prettier"
+import eslintConfigPrettier from "eslint-config-prettier"
 import importPlugin from "eslint-plugin-import"
 import pluginPrettier from "eslint-plugin-prettier"
+import globals from "globals"
+import tseslint from "typescript-eslint"
 
 export default [
 	js.configs.recommended,
+	...tseslint.configs.recommended,
 
 	{
+		languageOptions: {
+			globals: globals.node
+		},
 		plugins: {
 			prettier: pluginPrettier,
 			import: importPlugin
@@ -34,5 +40,19 @@ export default [
 		}
 	},
 
-	prettier
+	{
+		files: ["**/*.ts"],
+		languageOptions: {
+			parser: tseslint.parser,
+			parserOptions: {
+				project: "./tsconfig.json", // enable if you need type-aware rules
+				tsconfigRootDir: process.cwd()
+			}
+		},
+		rules: {
+			"@typescript-eslint/switch-exhaustiveness-check": "error"
+		}
+	},
+
+	eslintConfigPrettier
 ]
