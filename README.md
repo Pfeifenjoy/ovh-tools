@@ -4,7 +4,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Coverage](https://img.shields.io/badge/Coverage-66.66%25-yellow.svg)](https://github.com/Pfeifenjoy/ovh-tools)
 
 ⚠️ **This project is currently in development and not yet ready for production use.**
 
