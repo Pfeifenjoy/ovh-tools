@@ -1,3 +1,13 @@
+// Mock chalk and ovh modules
+jest.mock("chalk", () => ({
+	green: jest.fn(text => text),
+	cyan: jest.fn(text => text),
+	blue: jest.fn(text => text),
+	red: jest.fn(text => text)
+}))
+
+jest.mock("ovh", () => jest.fn())
+
 import { createCli } from "../src/cli"
 
 describe("CLI", () => {
