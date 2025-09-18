@@ -2,4 +2,6 @@
 
 import { createCli } from "./cli.js"
 
-createCli().parse()
+const cli = createCli()
+
+await cli.program.parseAsync()

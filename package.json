@@ -37,6 +37,7 @@
 	"devDependencies": {
 		"@types/jest": "^30.0.0",
 		"@types/node": "^24.5.2",
+		"@types/read": "^0.0.32",
 		"cspell": "^9.2.1",
 		"eslint": "^9.35.0",
 		"eslint-config-prettier": "^10.1.8",
@@ -54,6 +55,7 @@
 		"commander": "^14.0.1",
 		"open": "^10.2.0",
 		"ovh": "^2.0.3",
+		"read": "^4.1.0",
 		"winston": "^3.17.0",
 		"zod": "^4.1.9"
 	}

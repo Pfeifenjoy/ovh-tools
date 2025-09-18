@@ -1,12 +1,14 @@
 import { Command } from "commander"
 
-import { AuthOptionsSchema } from "./schemas/auth-options.js"
-import { AuthService } from "./services/auth-service.js"
+import { LoginOptionsSchema } from "./schemas/login-options.js"
 import { LoggerService } from "./services/logger-service.js"
+import { LoginService } from "./services/login-service.js"
+import { PromptService } from "./services/prompt-service.js"
 
 export function createCli() {
 	const logger = new LoggerService()
-	const authService = new AuthService(logger)
+	const promptService = new PromptService()
+	const loginService = new LoginService(logger, promptService)
 	const program = new Command()
 
 	program
@@ -15,23 +17,18 @@ export function createCli() {
 		.version("0.0.0")
 
 	program
-		.command("auth")
-		.description("Generate OVH application credentials")
-		.option("-r, --region <region>", "OVH region", "ovh-eu")
-		.requiredOption("-n, --name <name>", "Application name")
-		.requiredOption(
-			"-d, --description <description>",
-			"Application description"
-		)
+		.command("login")
+		.description("Login to OVH with username and password")
+		.option("-u, --username <username>", "OVH username")
+		.option("-p, --password <password>", "OVH password")
+		.option("-t, --two-factor-token <token>", "2FA token")
 		.action(async options => {
-			const validatedOptions = AuthOptionsSchema.parse(options)
+			const validatedOptions = LoginOptionsSchema.parse(options)
 
-			await authService.generateApplicationKey(
-				validatedOptions.region,
-				validatedOptions.name,
-				validatedOptions.description
-			)
+			await loginService.login(validatedOptions)
 		})
 
-	return program
+	return {
+		program
+	}
 }
