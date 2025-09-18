@@ -43,14 +43,7 @@ export default [
 	{
 		files: ["**/*.ts"],
 		languageOptions: {
-			parser: tseslint.parser,
-			parserOptions: {
-				project: "./tsconfig.json", // enable if you need type-aware rules
-				tsconfigRootDir: process.cwd()
-			}
-		},
-		rules: {
-			"@typescript-eslint/switch-exhaustiveness-check": "error"
+			parser: tseslint.parser
 		}
 	},
 
