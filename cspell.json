@@ -2,5 +2,5 @@
 	"version": "0.2",
 	"language": "en",
 	"words": ["ovh", "tseslint", "arwed", "mett", "pfeifenjoy", "logform"],
-	"ignorePaths": ["node_modules", "dist", "*.lock"]
+	"ignorePaths": ["node_modules", "dist", "coverage", "*.lock"]
 }

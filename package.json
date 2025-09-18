@@ -30,7 +30,7 @@
 		"test:lint:prettier": "npx prettier --check .",
 		"test:lint:spell": "npx cspell .",
 		"test:lint": "npm run test:lint:prettier && npm run test:lint:eslint && npm run test:lint:spell",
-		"test:unit": "npx jest",
+		"test:unit": "npx jest --coverage",
 		"test": "npm run test:lint && npm run test:unit",
 		"release": "npm run clean && npm run build && npm run test"
 	},
