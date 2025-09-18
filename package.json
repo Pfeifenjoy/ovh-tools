@@ -28,7 +28,8 @@
 		"format": "npm run format:prettier && npm run format:eslint",
 		"test:lint:eslint": "npx eslint .",
 		"test:lint:prettier": "npx prettier --check .",
-		"test:lint": "npm run test:lint:prettier && npm run test:lint:eslint",
+		"test:lint:spell": "npx cspell .",
+		"test:lint": "npm run test:lint:prettier && npm run test:lint:eslint && npm run test:lint:spell",
 		"test:unit": "npx jest",
 		"test": "npm run test:lint && npm run test:unit",
 		"release": "npm run clean && npm run build && npm run test"
@@ -36,6 +37,7 @@
 	"devDependencies": {
 		"@types/jest": "^30.0.0",
 		"@types/node": "^24.5.2",
+		"cspell": "^9.2.1",
 		"eslint": "^9.35.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-import": "^2.32.0",
