@@ -2,13 +2,16 @@ import { Command } from "commander"
 
 import { ApplicationService } from "./services/application-service.js"
 import { LoggerService } from "./services/logger-service.js"
+import { MetadataService } from "./services/metadata-service.js"
+import { PathService } from "./services/path-service.js"
 import { PromptService } from "./services/prompt-service.js"
 import { StorageService } from "./services/storage-service.js"
 
-export function createCli() {
-	const logger = new LoggerService()
+export async function createCli(logger: LoggerService) {
 	const promptService = new PromptService()
 	const storageService = new StorageService()
+	const pathService = new PathService()
+	const metadataService = new MetadataService(pathService)
 	const applicationService = new ApplicationService(
 		logger,
 		promptService,
@@ -19,7 +22,7 @@ export function createCli() {
 	program
 		.name("ovh-tools")
 		.description("CLI tool for streamlined OVH development workflows")
-		.version("0.0.0")
+		.version(await metadataService.getVersion())
 
 	const applicationCmd = program
 		.command("application")
