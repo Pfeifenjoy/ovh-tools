@@ -27,6 +27,10 @@ npm install -g ovh-tools
 ovh-tools --help
 ```
 
+## 📚 Documentation
+
+For detailed command documentation, see the [docs](./docs/) directory.
+
 ## 🛠️ Development
 
 ```bash

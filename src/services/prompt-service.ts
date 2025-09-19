@@ -13,4 +13,10 @@ export class PromptService {
 			silent: true
 		})
 	}
+
+	async promptBoolean(question: string): Promise<boolean> {
+		const answer = await this.prompt(`${question} (y/n): `)
+		const normalized = answer.toLowerCase()
+		return normalized === "y" || normalized === "yes"
+	}
 }

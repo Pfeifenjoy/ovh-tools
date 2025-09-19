@@ -1,14 +1,19 @@
 import { Command } from "commander"
 
-import { LoginOptionsSchema } from "./schemas/login-options.js"
+import { ApplicationService } from "./services/application-service.js"
 import { LoggerService } from "./services/logger-service.js"
-import { LoginService } from "./services/login-service.js"
 import { PromptService } from "./services/prompt-service.js"
+import { StorageService } from "./services/storage-service.js"
 
 export function createCli() {
 	const logger = new LoggerService()
 	const promptService = new PromptService()
-	const loginService = new LoginService(logger, promptService)
+	const storageService = new StorageService()
+	const applicationService = new ApplicationService(
+		logger,
+		promptService,
+		storageService
+	)
 	const program = new Command()
 
 	program
@@ -16,16 +21,15 @@ export function createCli() {
 		.description("CLI tool for streamlined OVH development workflows")
 		.version("0.0.0")
 
-	program
-		.command("login")
-		.description("Login to OVH with username and password")
-		.option("-u, --username <username>", "OVH username")
-		.option("-p, --password <password>", "OVH password")
-		.option("-t, --two-factor-token <token>", "2FA token")
-		.action(async options => {
-			const validatedOptions = LoginOptionsSchema.parse(options)
+	const applicationCmd = program
+		.command("application")
+		.description("Manage OVH applications")
 
-			await loginService.login(validatedOptions)
+	applicationCmd
+		.command("create")
+		.description("Create a new OVH application")
+		.action(async () => {
+			await applicationService.createApplication()
 		})
 
 	return {
