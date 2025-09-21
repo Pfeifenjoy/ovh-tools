@@ -1,42 +1,48 @@
 # OVH Tools Documentation
 
-Welcome to the OVH Tools documentation! This CLI tool helps streamline OVH development workflows.
+Welcome to the OVH Tools documentation! This CLI tool simplifies OVH API interactions with a developer-friendly interface.
 
-## Getting Started
+## Quick Start
 
-### Installation
+1. **Install the tool:**
 
-```bash
-npm install -g ovh-tools
+    ```bash
+    npm install -g ovh-tools
+    ```
+
+2. **Create an OVH application:**
+
+    ```bash
+    ovh-tools application create
+    ```
+
+3. **Obtain consumer key:**
+    ```bash
+    ovh-tools credentials update
+    ```
+
+## File Structure
+
+The tool creates a `.ovh-tools/` directory in your current working directory:
+
+```
+.ovh-tools/
+├── application.json    # Application key, secret, region
+└── credentials.json    # Consumer key for API access
 ```
 
-### Quick Start
+## Architecture
 
-Create your first OVH application:
+- **Service Layer**: Modular services for different concerns
+- **Exception Hierarchy**: Custom exceptions extending BaseException
+- **Schema Validation**: Zod schemas for runtime type safety
+- **Browser Integration**: Automatic URL opening with fallbacks
+- **Secure Storage**: Separate files for different credential types
 
-```bash
-ovh-tools application create
-```
+## Commands
 
-## Available Commands
+See [commands.md](./commands.md) for detailed command documentation.
 
-- [`application create`](./commands.md#ovh-tools-application-create) - Create a new OVH application
+## Development
 
-## Configuration
-
-OVH Tools stores configuration files in the `.ovh-tools` directory in your current working directory:
-
-- `application.json` - OVH application credentials
-
-## Regions
-
-OVH Tools supports both OVH regions:
-
-- **EU** - European region (`https://eu.api.ovh.com`)
-- **US** - US region (`https://api.us.ovhcloud.com`)
-
-## Security
-
-- Application secrets are masked in output
-- Configuration files are automatically added to `.gitignore`
-- Credentials are validated using Zod schemas
+For development information, see the main [README.md](../README.md).

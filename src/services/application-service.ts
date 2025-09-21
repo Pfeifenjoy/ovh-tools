@@ -1,13 +1,19 @@
-import open from "open"
 import { z } from "zod"
 
+import { BrowserService } from "./browser-service.js"
 import { LoggerService } from "./logger-service.js"
 import { OvhApiService } from "./ovh-api-service.js"
 import { PromptService } from "./prompt-service.js"
 import { StorageService } from "./storage-service.js"
+import { ApplicationNotFoundException } from "../exceptions/application-not-found-exception.js"
+import { ApplicationCredentials } from "../schemas/application-credentials.js"
 
 const RegionSchema = z.enum(["eu", "us"])
 
+/**
+ * Service for managing OVH application creation and configuration.
+ * Handles the workflow of creating OVH applications and storing credentials.
+ */
 export class ApplicationService {
 	constructor(
 		private logger: LoggerService,
@@ -15,16 +21,31 @@ export class ApplicationService {
 		private storageService: StorageService
 	) {}
 
+	/**
+	 * Requires an existing application configuration.
+	 * @throws {ApplicationNotFoundException} When no application is found
+	 * @returns Promise resolving to application credentials
+	 */
+	async requireApplication(): Promise<ApplicationCredentials> {
+		const existingApplication = await this.storageService.loadApplication()
+		if (!existingApplication) {
+			throw new ApplicationNotFoundException()
+		}
+		return existingApplication
+	}
+
 	private async checkOverwrite(): Promise<boolean> {
-		const existingApp = await this.storageService.loadApplication()
-		if (!existingApp) {
+		const existingApplication = await this.storageService.loadApplication()
+		if (!existingApplication) {
 			return true
 		}
 
 		this.logger.info(
-			`📋 Found existing application for ${existingApp.region.toUpperCase()} region`
+			`📋 Found existing application for ${existingApplication.region.toUpperCase()} region`
 		)
-		this.logger.info(`🔑 Application Key: ${existingApp.applicationKey}`)
+		this.logger.info(
+			`🔑 Application Key: ${existingApplication.applicationKey}`
+		)
 
 		const overwrite = await this.promptService.promptBoolean(
 			"Do you want to overwrite it?"
@@ -37,6 +58,10 @@ export class ApplicationService {
 		return overwrite
 	}
 
+	/**
+	 * Creates a new OVH application through guided workflow.
+	 * Opens browser, collects credentials, and saves configuration.
+	 */
 	async createApplication(): Promise<void> {
 		// Check if we should proceed
 		if (!(await this.checkOverwrite())) {
@@ -62,18 +87,12 @@ export class ApplicationService {
 		// Create API service with region
 		const apiService = new OvhApiService(region)
 		const createUrl = apiService.getCreateAppUrl()
+		const browserService = new BrowserService(this.logger)
 
-		this.logger.info(
-			`🌍 Opening ${region.toUpperCase()} application creation page...`
+		await browserService.openUrl(
+			createUrl,
+			`Opening ${region.toUpperCase()} application creation page...`
 		)
-
-		try {
-			await open(createUrl)
-			this.logger.info("✅ Browser opened successfully")
-		} catch {
-			this.logger.error("❌ Failed to open browser")
-			this.logger.info(`🔗 Please visit manually: ${createUrl}`)
-		}
 
 		this.logger.info("\n📝 Please create your application in the browser:")
 		this.logger.info("1. Login to your OVH account")

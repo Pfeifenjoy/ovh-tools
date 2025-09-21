@@ -6,21 +6,21 @@ import { LoggerService } from "../src/services/logger-service"
 test.describe("CLI", () => {
 	test("should create a program with correct name", async () => {
 		const logger = new LoggerService()
-		const cli = await createCli(logger)
-		expect(cli.program.name()).toBe("ovh-tools")
+		const { program } = await createCli(logger)
+		expect(program.name()).toBe("ovh-tools")
 	})
 
 	test("should have correct description", async () => {
 		const logger = new LoggerService()
-		const cli = await createCli(logger)
-		expect(cli.program.description()).toBe(
+		const { program } = await createCli(logger)
+		expect(program.description()).toBe(
 			"CLI tool for streamlined OVH development workflows"
 		)
 	})
 
 	test("should have correct version", async () => {
 		const logger = new LoggerService()
-		const cli = await createCli(logger)
-		expect(cli.program.version()).toBe("0.0.0")
+		const { program } = await createCli(logger)
+		expect(program.version()).toBe("0.0.0")
 	})
 })

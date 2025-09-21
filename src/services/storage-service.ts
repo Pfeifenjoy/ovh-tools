@@ -6,6 +6,7 @@ import {
 	ApplicationCredentials,
 	ApplicationCredentialsSchema
 } from "../schemas/application-credentials.js"
+import { Credentials, CredentialsSchema } from "../schemas/credentials.js"
 
 export class StorageService {
 	private readonly configDir = ".ovh-tools"
@@ -38,6 +39,27 @@ export class StorageService {
 			const content = await readFile(applicationPath, "utf-8")
 			const data = JSON.parse(content)
 			return ApplicationCredentialsSchema.parse(data)
+		} catch {
+			return null
+		}
+	}
+
+	async saveCredentials(credentials: Credentials): Promise<void> {
+		await this.ensureConfigDir()
+		const credentialsPath = this.resolve("credentials.json")
+		await writeFile(credentialsPath, JSON.stringify(credentials, null, 2))
+	}
+
+	async loadCredentials(): Promise<Credentials | null> {
+		const credentialsPath = this.resolve("credentials.json")
+		if (!existsSync(credentialsPath)) {
+			return null
+		}
+
+		try {
+			const content = await readFile(credentialsPath, "utf-8")
+			const data = JSON.parse(content)
+			return CredentialsSchema.parse(data)
 		} catch {
 			return null
 		}

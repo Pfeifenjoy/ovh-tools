@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createCli } from "./cli.js"
+import { BaseException } from "./exceptions/base-exception.js"
 import { LoggerService } from "./services/logger-service.js"
 
 async function main() {
@@ -10,8 +11,12 @@ async function main() {
 		const { program } = await createCli(logger)
 		await program.parseAsync()
 	} catch (error) {
-		const message = error instanceof Error ? error.message : String(error)
-		logger.error(`Unexpected error: ${message}`)
+		if (error instanceof BaseException) {
+			logger.error(`❌ ${error.message}`)
+		} else if (error instanceof Error) {
+			const message = error.message
+			logger.error(`❌ Unexpected error: ${message}`)
+		}
 		process.exit(1)
 	}
 }

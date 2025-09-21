@@ -14,6 +14,8 @@
 - 🔧 Developer-friendly command interface
 - 📦 TypeScript support with full type safety
 - 🎯 Optimized for modern development workflows
+- 🔐 Secure credential management with separate storage
+- 🌍 Multi-region support (EU/US)
 
 ## 🚀 Installation
 
@@ -23,13 +25,57 @@ npm install -g ovh-tools
 
 ## 📖 Usage
 
+### Create OVH Application
+
+First, create an OVH application to get your API credentials:
+
 ```bash
-ovh-tools --help
+ovh-tools application create
 ```
 
-## 📚 Documentation
+This will:
 
-For detailed command documentation, see the [docs](./docs/) directory.
+1. Open your browser to the OVH application creation page
+2. Guide you through creating an application
+3. Save your application key, secret, and region to `.ovh-tools/application.json`
+
+### Obtain Consumer Key
+
+After creating an application, obtain a consumer key for API access:
+
+```bash
+ovh-tools credentials update
+```
+
+This will:
+
+1. Request a consumer key from the OVH API
+2. Open your browser to validate the credentials
+3. Save the consumer key to `.ovh-tools/credentials.json`
+
+### File Structure
+
+```
+.ovh-tools/
+├── application.json    # Application key, secret, region
+└── credentials.json    # Consumer key for API access
+```
+
+## 🔧 Commands
+
+| Command                        | Description                  |
+| ------------------------------ | ---------------------------- |
+| `ovh-tools application create` | Create a new OVH application |
+| `ovh-tools credentials update` | Obtain/update consumer key   |
+| `ovh-tools --help`             | Show help information        |
+
+## 🏗️ Architecture
+
+- **Exception Hierarchy**: Custom exceptions extending BaseException
+- **Service Layer**: Modular services for different concerns
+- **Schema Validation**: Zod schemas for runtime type safety
+- **Browser Integration**: Automatic URL opening with fallbacks
+- **Secure Storage**: Separate files for different credential types
 
 ## 🛠️ Development
 

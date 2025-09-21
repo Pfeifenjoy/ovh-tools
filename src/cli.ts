@@ -1,6 +1,7 @@
 import { Command } from "commander"
 
 import { ApplicationService } from "./services/application-service.js"
+import { CredentialsService } from "./services/credentials-service.js"
 import { LoggerService } from "./services/logger-service.js"
 import { MetadataService } from "./services/metadata-service.js"
 import { PathService } from "./services/path-service.js"
@@ -17,6 +18,12 @@ export async function createCli(logger: LoggerService) {
 		promptService,
 		storageService
 	)
+	const credentialsService = new CredentialsService(
+		logger,
+		promptService,
+		storageService,
+		applicationService
+	)
 	const program = new Command()
 
 	program
@@ -31,11 +38,19 @@ export async function createCli(logger: LoggerService) {
 	applicationCmd
 		.command("create")
 		.description("Create a new OVH application")
-		.action(async () => {
-			await applicationService.createApplication()
-		})
+		.action(() => applicationService.createApplication())
+
+	const credentialsCmd = program
+		.command("credentials")
+		.description("Manage OVH credentials")
+
+	credentialsCmd
+		.command("update")
+		.description("Update existing credentials")
+		.action(() => credentialsService.updateCredentials())
 
 	return {
-		program
+		program,
+		logger
 	}
 }
