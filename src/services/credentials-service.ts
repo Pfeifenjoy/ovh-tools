@@ -72,5 +72,8 @@ export class CredentialsService {
 
 		this.logger.info("✅ Consumer key updated!")
 		this.logger.info("💾 Saved to: .ovh-tools/credentials.json")
+		this.logger.info(
+			'💡 Run: eval "$(ovh-tools environment bash)" to update your environment'
+		)
 	}
 }

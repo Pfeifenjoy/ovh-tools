@@ -2,6 +2,7 @@ import { existsSync } from "fs"
 import { mkdir, readFile, writeFile } from "fs/promises"
 import { join } from "path"
 
+import { CredentialsNotFoundException } from "../exceptions/credentials-not-found-exception.js"
 import {
 	ApplicationCredentials,
 	ApplicationCredentialsSchema
@@ -63,5 +64,17 @@ export class StorageService {
 		} catch {
 			return null
 		}
+	}
+
+	/**
+	 * Loads consumer key credentials from credentials.json.
+	 * Throws CredentialsNotFoundException if file doesn't exist.
+	 */
+	async requireCredentials(): Promise<Credentials> {
+		const credentials = await this.loadCredentials()
+		if (!credentials) {
+			throw new CredentialsNotFoundException()
+		}
+		return credentials
 	}
 }

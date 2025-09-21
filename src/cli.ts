@@ -2,6 +2,7 @@ import { Command } from "commander"
 
 import { ApplicationService } from "./services/application-service.js"
 import { CredentialsService } from "./services/credentials-service.js"
+import { EnvironmentService } from "./services/environment-service.js"
 import { LoggerService } from "./services/logger-service.js"
 import { MetadataService } from "./services/metadata-service.js"
 import { PathService } from "./services/path-service.js"
@@ -17,6 +18,10 @@ export async function createCli(logger: LoggerService) {
 		logger,
 		promptService,
 		storageService
+	)
+	const environmentService = new EnvironmentService(
+		storageService,
+		applicationService
 	)
 	const credentialsService = new CredentialsService(
 		logger,
@@ -48,6 +53,25 @@ export async function createCli(logger: LoggerService) {
 		.command("update")
 		.description("Update existing credentials")
 		.action(() => credentialsService.updateCredentials())
+
+	const environmentCmd = program
+		.command("environment")
+		.description("Load credentials into environment variables")
+
+	environmentCmd
+		.command("bash")
+		.description("Output bash export commands")
+		.action(() => environmentService.bash())
+
+	environmentCmd
+		.command("zsh")
+		.description("Output zsh export commands")
+		.action(() => environmentService.zsh())
+
+	environmentCmd
+		.command("fish")
+		.description("Output fish set commands")
+		.action(() => environmentService.fish())
 
 	return {
 		program,

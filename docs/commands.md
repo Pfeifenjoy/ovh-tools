@@ -82,6 +82,73 @@ Press Enter after validating your credentials...
 💾 Saved to: .ovh-tools/credentials.json
 ```
 
+## `ovh-tools environment`
+
+Outputs shell-specific export commands for environment variables.
+
+### Subcommands
+
+#### `ovh-tools environment bash`
+
+Outputs bash export commands.
+
+```bash
+ovh-tools environment bash
+```
+
+**Example Output:**
+
+```bash
+export OVH_APPLICATION_KEY="your_app_key_123"
+export OVH_APPLICATION_SECRET="your_secret_456"
+export OVH_CONSUMER_KEY="your_consumer_key_789"
+export OVH_ENDPOINT="ovh-eu"
+```
+
+**Usage:**
+
+```bash
+eval "$(ovh-tools environment bash)"
+echo $OVH_APPLICATION_KEY  # Now works!
+```
+
+#### `ovh-tools environment zsh`
+
+Outputs zsh export commands.
+
+```bash
+ovh-tools environment zsh
+```
+
+**Usage:**
+
+```bash
+eval "$(ovh-tools environment zsh)"
+```
+
+#### `ovh-tools environment fish`
+
+Outputs fish set commands.
+
+```bash
+ovh-tools environment fish
+```
+
+**Example Output:**
+
+```bash
+set -x OVH_APPLICATION_KEY "your_app_key_123"
+set -x OVH_APPLICATION_SECRET "your_secret_456"
+set -x OVH_CONSUMER_KEY "your_consumer_key_789"
+set -x OVH_ENDPOINT "ovh-eu"
+```
+
+**Usage:**
+
+```bash
+eval (ovh-tools environment fish)
+```
+
 ## Global Options
 
 ### `--help`

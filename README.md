@@ -67,6 +67,9 @@ This will:
 | ------------------------------ | ---------------------------- |
 | `ovh-tools application create` | Create a new OVH application |
 | `ovh-tools credentials update` | Obtain/update consumer key   |
+| `ovh-tools environment bash`   | Output bash export commands  |
+| `ovh-tools environment zsh`    | Output zsh export commands   |
+| `ovh-tools environment fish`   | Output fish set commands     |
 | `ovh-tools --help`             | Show help information        |
 
 ## 🏗️ Architecture
