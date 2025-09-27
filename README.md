@@ -70,6 +70,7 @@ This will:
 | `ovh-tools environment bash`   | Output bash export commands  |
 | `ovh-tools environment zsh`    | Output zsh export commands   |
 | `ovh-tools environment fish`   | Output fish set commands     |
+| `ovh-tools environment dotenv` | Create or update .env file   |
 | `ovh-tools --help`             | Show help information        |
 
 ## 🏗️ Architecture

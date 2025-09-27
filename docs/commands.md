@@ -149,6 +149,35 @@ set -x OVH_ENDPOINT "ovh-eu"
 eval (ovh-tools environment fish)
 ```
 
+#### `ovh-tools environment dotenv`
+
+Creates or updates a .env file with environment variables.
+
+```bash
+ovh-tools environment dotenv
+```
+
+**Example Output:**
+
+```
+✅ Updated .env
+```
+
+**Generated .env file:**
+
+```
+OVH_APPLICATION_KEY=your_app_key_123
+OVH_APPLICATION_SECRET=your_secret_456
+OVH_CONSUMER_KEY=your_consumer_key_789
+OVH_ENDPOINT=ovh-eu
+```
+
+**Usage:**
+
+- Creates `.env` file if it doesn't exist
+- Updates existing variables if they already exist
+- Preserves other variables in the file
+
 ## Global Options
 
 ### `--help`

@@ -1,6 +1,14 @@
 {
 	"version": "0.2",
 	"language": "en",
-	"words": ["ovh", "tseslint", "arwed", "mett", "pfeifenjoy", "logform"],
+	"words": [
+		"ovh",
+		"tseslint",
+		"arwed",
+		"mett",
+		"pfeifenjoy",
+		"logform",
+		"asynciterable"
+	],
 	"ignorePaths": ["node_modules", "dist", "coverage", "*.lock"]
 }

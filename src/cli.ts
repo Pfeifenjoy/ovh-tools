@@ -20,6 +20,7 @@ export async function createCli(logger: LoggerService) {
 		storageService
 	)
 	const environmentService = new EnvironmentService(
+		logger,
 		storageService,
 		applicationService
 	)
@@ -72,6 +73,11 @@ export async function createCli(logger: LoggerService) {
 		.command("fish")
 		.description("Output fish set commands")
 		.action(() => environmentService.fish())
+
+	environmentCmd
+		.command("dotenv")
+		.description("Create or update .env file")
+		.action(() => environmentService.dotenv())
 
 	return {
 		program,
