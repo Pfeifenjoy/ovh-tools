@@ -41,13 +41,17 @@ export class EnvironmentService {
 		const credentials = await this.requireCredentials()
 
 		// Use console.log to print directly to stdout, not winston logging
+		// eslint-disable-next-line no-console
 		console.log(
 			`export OVH_APPLICATION_KEY="${credentials.applicationKey}"`
 		)
+		// eslint-disable-next-line no-console
 		console.log(
 			`export OVH_APPLICATION_SECRET="${credentials.applicationSecret}"`
 		)
+		// eslint-disable-next-line no-console
 		console.log(`export OVH_CONSUMER_KEY="${credentials.consumerKey}"`)
+		// eslint-disable-next-line no-console
 		console.log(`export OVH_ENDPOINT="${credentials.endpoint}"`)
 	}
 
@@ -58,13 +62,17 @@ export class EnvironmentService {
 		const credentials = await this.requireCredentials()
 
 		// Use console.log to print directly to stdout, not winston logging
+		// eslint-disable-next-line no-console
 		console.log(
 			`export OVH_APPLICATION_KEY="${credentials.applicationKey}"`
 		)
+		// eslint-disable-next-line no-console
 		console.log(
 			`export OVH_APPLICATION_SECRET="${credentials.applicationSecret}"`
 		)
+		// eslint-disable-next-line no-console
 		console.log(`export OVH_CONSUMER_KEY="${credentials.consumerKey}"`)
+		// eslint-disable-next-line no-console
 		console.log(`export OVH_ENDPOINT="${credentials.endpoint}"`)
 	}
 
@@ -75,13 +83,17 @@ export class EnvironmentService {
 		const credentials = await this.requireCredentials()
 
 		// Use console.log to print directly to stdout, not winston logging
+		// eslint-disable-next-line no-console
 		console.log(
 			`set -x OVH_APPLICATION_KEY "${credentials.applicationKey}"`
 		)
+		// eslint-disable-next-line no-console
 		console.log(
 			`set -x OVH_APPLICATION_SECRET "${credentials.applicationSecret}"`
 		)
+		// eslint-disable-next-line no-console
 		console.log(`set -x OVH_CONSUMER_KEY "${credentials.consumerKey}"`)
+		// eslint-disable-next-line no-console
 		console.log(`set -x OVH_ENDPOINT "${credentials.endpoint}"`)
 	}
 
