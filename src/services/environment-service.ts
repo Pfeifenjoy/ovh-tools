@@ -20,7 +20,11 @@ export class EnvironmentService {
 		private applicationService: ApplicationService
 	) {}
 
-	private async requireCredentials() {
+	/**
+	 * Loads consumer key credentials from credentials.json.
+	 * Throws CredentialsNotFoundException if file doesn't exist.
+	 */
+	public async requireCredentials() {
 		const application = await this.applicationService.requireApplication()
 		const credentials = await this.storageService.requireCredentials()
 

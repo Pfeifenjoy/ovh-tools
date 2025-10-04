@@ -61,6 +61,31 @@ This will:
 └── credentials.json    # Consumer key for API access
 ```
 
+## 🔌 Programmatic Usage
+
+You can use ovh-tools programmatically in your Node.js applications:
+
+```javascript
+import { CoreService } from "ovh-tools"
+
+const core = new CoreService()
+
+// Get OVH credentials for use in your application
+const credentials = await core.environmentService.requireCredentials()
+
+console.log(credentials.applicationKey)
+console.log(credentials.applicationSecret)
+console.log(credentials.consumerKey)
+console.log(credentials.endpoint) // 'ovh-eu' or 'ovh-us'
+```
+
+This is useful for:
+
+- Building applications that need OVH API access
+- Integrating with existing OVH SDKs
+- Creating custom automation scripts
+- Testing and development workflows
+
 ## 🔧 Commands
 
 | Command                        | Description                  |
