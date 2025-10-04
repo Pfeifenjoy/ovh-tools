@@ -3,6 +3,7 @@ name: CI
 on:
     push:
         branches: [master]
+        tags: ["v*"]
     pull_request:
         branches: [master]
 
@@ -27,3 +28,28 @@ jobs:
 
             - name: Run tests
               run: npm test
+
+    publish:
+        needs: build
+        runs-on: ubuntu-latest
+        if: startsWith(github.ref, 'refs/tags/v')
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  registry-url: "https://registry.npmjs.org"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build
+              run: npm run build
+
+            - name: Publish to npm
+              run: npm publish --provenance --access public
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
