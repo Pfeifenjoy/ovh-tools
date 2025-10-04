@@ -7,6 +7,17 @@ import { PathService } from "./path-service.js"
 import { PromptService } from "./prompt-service.js"
 import { StorageService } from "./storage-service.js"
 
+export interface CoreServiceOptions {
+	logger?: LoggerService
+	promptService?: PromptService
+	storageService?: StorageService
+	pathService?: PathService
+	metadataService?: MetadataService
+	applicationService?: ApplicationService
+	environmentService?: EnvironmentService
+	credentialsService?: CredentialsService
+}
+
 export class CoreService {
 	public readonly logger: LoggerService
 	public readonly promptService: PromptService
@@ -17,27 +28,34 @@ export class CoreService {
 	public readonly environmentService: EnvironmentService
 	public readonly credentialsService: CredentialsService
 
-	constructor() {
-		this.logger = new LoggerService()
-		this.promptService = new PromptService()
-		this.storageService = new StorageService()
-		this.pathService = new PathService()
-		this.metadataService = new MetadataService(this.pathService)
-		this.applicationService = new ApplicationService(
-			this.logger,
-			this.promptService,
-			this.storageService
-		)
-		this.environmentService = new EnvironmentService(
-			this.logger,
-			this.storageService,
-			this.applicationService
-		)
-		this.credentialsService = new CredentialsService(
-			this.logger,
-			this.promptService,
-			this.storageService,
-			this.applicationService
-		)
+	constructor(options: CoreServiceOptions = {}) {
+		this.logger = options.logger ?? new LoggerService()
+		this.promptService = options.promptService ?? new PromptService()
+		this.storageService = options.storageService ?? new StorageService()
+		this.pathService = options.pathService ?? new PathService()
+		this.metadataService =
+			options.metadataService ?? new MetadataService(this.pathService)
+		this.applicationService =
+			options.applicationService ??
+			new ApplicationService(
+				this.logger,
+				this.promptService,
+				this.storageService
+			)
+		this.environmentService =
+			options.environmentService ??
+			new EnvironmentService(
+				this.logger,
+				this.storageService,
+				this.applicationService
+			)
+		this.credentialsService =
+			options.credentialsService ??
+			new CredentialsService(
+				this.logger,
+				this.promptService,
+				this.storageService,
+				this.applicationService
+			)
 	}
 }
