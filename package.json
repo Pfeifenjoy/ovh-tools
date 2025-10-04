@@ -32,7 +32,8 @@
 		"test:lint": "npm run test:lint:prettier && npm run test:lint:eslint && npm run test:lint:spell",
 		"test:unit": "c8 npx playwright test",
 		"test": "npm run test:lint && npm run test:unit",
-		"release": "npm run clean && npm run build && npm run test"
+		"release": "npm run clean && npm run build && npm run test",
+		"prepare": "husky"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.55.0",
@@ -45,6 +46,7 @@
 		"eslint-plugin-import": "^2.32.0",
 		"eslint-plugin-prettier": "^5.5.4",
 		"globals": "^16.4.0",
+		"husky": "^9.1.7",
 		"jiti": "^2.5.1",
 		"prettier": "^3.6.2",
 		"ts-jest": "^29.4.2",
