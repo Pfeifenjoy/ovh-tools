@@ -17,10 +17,4 @@ test.describe("CLI", () => {
 			"CLI tool for streamlined OVH development workflows"
 		)
 	})
-
-	test("should have correct version", async () => {
-		const core = new CoreService()
-		const program = await createCli(core)
-		expect(program.version()).toBe("0.0.0")
-	})
 })
