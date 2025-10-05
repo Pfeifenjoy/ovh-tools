@@ -1,6 +1,6 @@
 {
 	"name": "@arwed/ovh-tools",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "Cli tool for more effective development with OVH.",
 	"keywords": [
 		"ovh"
