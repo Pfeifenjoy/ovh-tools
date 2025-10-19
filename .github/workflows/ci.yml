@@ -58,7 +58,7 @@ jobs:
                   ovh-tools --version
 
     publish:
-        needs: build
+        needs: [build, integration]
         runs-on: ubuntu-latest
         if: startsWith(github.ref, 'refs/tags/v')
         environment: master
