@@ -1,7 +1,7 @@
 import { z } from "zod"
 
-export const CredentialsSchema = z.object({
+export const StoredCredentialsSchema = z.object({
 	consumerKey: z.string()
 })
 
-export type Credentials = z.infer<typeof CredentialsSchema>
+export type StoredCredentials = z.infer<typeof StoredCredentialsSchema>

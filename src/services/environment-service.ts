@@ -183,3 +183,7 @@ export class EnvironmentService {
 		this.logger.info("✅ Updated .env")
 	}
 }
+
+export type Credentials = Awaited<
+	ReturnType<EnvironmentService["requireCredentials"]>
+>

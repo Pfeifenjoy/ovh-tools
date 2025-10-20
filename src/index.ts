@@ -20,13 +20,14 @@ export { OvhApiException } from "./exceptions/ovh-api-exception.js"
 
 // Schemas
 export { ApplicationCredentialsSchema } from "./schemas/application-credentials.js"
-export { CredentialsSchema } from "./schemas/credentials.js"
+export { StoredCredentialsSchema } from "./schemas/credentials.js"
 export { OvhCredentialResponseSchema } from "./schemas/ovh-credential-response.js"
 export { PackageJsonSchema } from "./schemas/package-json.js"
 
 // Types
 export type { ApplicationCredentials } from "./schemas/application-credentials.js"
-export type { Credentials } from "./schemas/credentials.js"
+export type { StoredCredentials } from "./schemas/credentials.js"
 export type { OvhCredentialResponse } from "./schemas/ovh-credential-response.js"
 export type { PackageJson } from "./schemas/package-json.js"
+export type { Credentials } from "./services/environment-service.js"
 export type { CoreServiceOptions } from "./services/core-service.js"

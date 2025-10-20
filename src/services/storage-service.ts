@@ -17,7 +17,10 @@ import {
 	ApplicationCredentials,
 	ApplicationCredentialsSchema
 } from "../schemas/application-credentials.js"
-import { Credentials, CredentialsSchema } from "../schemas/credentials.js"
+import {
+	StoredCredentials,
+	StoredCredentialsSchema
+} from "../schemas/credentials.js"
 
 export class StorageService {
 	private readonly configDir = ".ovh-tools"
@@ -65,7 +68,7 @@ export class StorageService {
 	/**
 	 * Saves consumer key credentials to credentials.json file.
 	 */
-	async saveCredentials(credentials: Credentials): Promise<void> {
+	async saveCredentials(credentials: StoredCredentials): Promise<void> {
 		await this.ensureConfigDir()
 		const credentialsPath = this.resolve("credentials.json")
 		await writeFile(credentialsPath, JSON.stringify(credentials, null, 2))
@@ -75,7 +78,7 @@ export class StorageService {
 	 * Loads consumer key credentials from credentials.json file.
 	 * Returns null if file doesn't exist or is invalid.
 	 */
-	async loadCredentials(): Promise<Credentials | null> {
+	async loadCredentials(): Promise<StoredCredentials | null> {
 		const credentialsPath = this.resolve("credentials.json")
 		if (!existsSync(credentialsPath)) {
 			return null
@@ -84,7 +87,7 @@ export class StorageService {
 		try {
 			const content = await readFile(credentialsPath, "utf-8")
 			const data = JSON.parse(content)
-			return CredentialsSchema.parse(data)
+			return StoredCredentialsSchema.parse(data)
 		} catch {
 			return null
 		}
@@ -94,7 +97,7 @@ export class StorageService {
 	 * Loads consumer key credentials from credentials.json.
 	 * Throws CredentialsNotFoundException if file doesn't exist.
 	 */
-	async requireCredentials(): Promise<Credentials> {
+	async requireCredentials(): Promise<StoredCredentials> {
 		const credentials = await this.loadCredentials()
 		if (!credentials) {
 			throw new CredentialsNotFoundException()
